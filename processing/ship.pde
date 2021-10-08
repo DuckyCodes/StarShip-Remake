@@ -3,7 +3,8 @@ class Ship extends GameObject{
 
  PVector direction;
  int shotTimer, threshold;
- 
+ float lvx = velocity.x;
+ float lvy = velocity.y;
   //2. constructor(S)
   Ship(){
     lives = 3;
@@ -21,7 +22,7 @@ class Ship extends GameObject{
   rotate(direction.heading());
   noFill();
   stroke(255);
-  triangle(-25, -25, -25, 12.5, 25 , 0);
+  triangle(-25, -12.5, -25, 19.5, 25 , 0);
   popMatrix();
    
    
@@ -30,14 +31,25 @@ class Ship extends GameObject{
  void act() {
    super.act();
    shotTimer++;
+   lvx = velocity.x;
+   lvy = velocity.y;
+   if(upkey){ 
+     
+     velocity.add(direction);
+     myObjects.add(new Fire()); 
+   }
+   if(downkey) velocity.sub(direction);{
+     
+   }
+     
    
-   if(upkey) velocity.add(direction);
-   if(downkey) velocity.sub(direction);
    if(leftkey) direction.rotate(-radians(5) );
    if(rightkey) direction.rotate(radians(5) );
    if(spacekey&& shotTimer>threshold){
      myObjects.add(new Bullet());
     shotTimer=0;
+    
+    
    }
    
  }
