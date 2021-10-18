@@ -34,7 +34,9 @@ class Asteroid extends GameObject {
       if (b instanceof Ship ) {
         ShipBmAsteroids(b);
       }
-
+      if (b instanceof UFOBullet) {
+        UFOBulletAsteroids(b);
+      }
       i++;
     }
   }
@@ -74,6 +76,21 @@ class Asteroid extends GameObject {
         myObjects.add(new Asteroid(size/2, location.x, location.y));
         myObjects.add(new Asteroid(size/2, location.x, location.y));
       }
+    }
+  }
+
+  void UFOBulletAsteroids(GameObject b) {
+    lives = 0;
+    int i = 0;
+    int r = 0;
+    while (i <= 180) {
+      myObjects.add(new Particle(r, location.x, location.y, size/7));
+      i++;
+      r++;
+    }
+    if (size >= 25) {
+      myObjects.add(new Asteroid(size/2, location.x, location.y));
+      myObjects.add(new Asteroid(size/2, location.x, location.y));
     }
   }
 }

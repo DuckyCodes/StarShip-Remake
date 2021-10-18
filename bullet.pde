@@ -1,7 +1,6 @@
 class Bullet extends GameObject{
  
-   int timer;
-  
+
   Bullet() {
     timer = 60;
    lives = 12;
