@@ -28,11 +28,11 @@ class Asteroid extends GameObject {
     int i = 0;
     while (i < myObjects.size()) {
       GameObject b = myObjects.get(i);
-      if (b instanceof Bullet ) {
+      if (b instanceof Bullet) {
         collideWithBullet(b);
       }
-      if (b instanceof Ship) {
-        collideWithShip(b);
+      if (b instanceof Ship ) {
+        ShipBmAsteroids(b);
       }
 
       i++;
@@ -44,22 +44,36 @@ class Asteroid extends GameObject {
     if (dist(location.x, location.y, b.location.x, b.location.y)<=size/2 + b.size) {
       b.lives=0;
       lives = 0;
-
-
-      if (size >= 50) {
-        myObjects.add(new Asteroid(size/2, location.x, location.y));
-        myObjects.add(new Asteroid(size/2, location.x, location.y));
+      int i = 0;
+      int r = 0;
+      while (i <= 180) {
+        myObjects.add(new Particle(r, location.x, location.y, size/7));
+        i++;
+        r++;
       }
-    }  
-  }
 
-    void collideWithShip(GameObject b) {
-      if (dist(location.x, location.y, b.location.x, b.location.y)<=size/2 + b.size) {
-
-        lives = lives - 1;
-        if (lives == 0) {
-          mode   = gameover;
-        }
+      if (size >= 25) {
+        myObjects.add(new Asteroid(size/2, location.x, location.y));
+        myObjects.add(new Asteroid(size/2, location.x, location.y));
       }
     }
   }
+
+  void ShipBmAsteroids(GameObject b) {
+
+    if (dist(location.x, location.y, b.location.x, b.location.y)<=size/2 + b.size/2) {
+      lives = 0;
+      int i = 0;
+      int r = 0;
+      while (i <= 180) {
+        myObjects.add(new Particle(r, location.x, location.y, size/7));
+        i++;
+        r++;
+      }
+      if (size >= 25) {
+        myObjects.add(new Asteroid(size/2, location.x, location.y));
+        myObjects.add(new Asteroid(size/2, location.x, location.y));
+      }
+    }
+  }
+}
